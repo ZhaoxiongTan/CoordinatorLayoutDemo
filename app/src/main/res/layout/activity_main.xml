@@ -9,26 +9,30 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:minHeight="30dp"
         android:background="#CCCCCC">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
             android:layout_height="250dp"
+            android:minHeight="100dp"
             android:background="#648EB3"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <TextView
+                android:id="@+id/tv_expand"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Title 展开版本"
                 android:textSize="80sp"
                 android:textColor="#B56161"
+                android:background="#7AA663"
                 android:gravity="center"
                 app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.5"
                 />
 
             <androidx.appcompat.widget.Toolbar
@@ -41,6 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <ImageView
+                        android:id="@+id/iv_avatar"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:src="#7A1212"
