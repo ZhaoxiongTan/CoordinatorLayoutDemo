@@ -1,13 +1,11 @@
 package tech.tanzx.coordinatorlayoutdemo
 
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.widget.Toast
+import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
+import com.blankj.utilcode.util.BarUtils
 import com.google.android.material.appbar.AppBarLayout
 import tech.tanzx.coordinatorlayoutdemo.databinding.ActivityMainBinding
 import kotlin.math.abs
@@ -27,24 +25,35 @@ class MainActivity : AppCompatActivity() {
 
     private fun initView() {
 
-//        binding.collapsingToolbarLayout.set
+        BarUtils.setStatusBarColor(this, Color.TRANSPARENT)
+        BarUtils.setStatusBarLightMode(this, true)
+
+        //toolbar 填充状态栏空白空间
+        val statusBarHeight = BarUtils.getStatusBarHeight()
+        binding.toolbar.post {
+            val newHeight = binding.toolbar.height + statusBarHeight
+            val layoutParams = binding.toolbar.layoutParams as FrameLayout.LayoutParams
+            layoutParams.height = newHeight
+            binding.toolbar.layoutParams = layoutParams
+
+            val containerLayoutParams =
+                binding.containerToolbarContent.layoutParams as FrameLayout.LayoutParams
+            containerLayoutParams.topMargin = statusBarHeight
+            binding.containerToolbarContent.layoutParams = containerLayoutParams
+        }
 
         binding.appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
 
-            if (abs(verticalOffset) - appBarLayout.totalScrollRange == 0){
-                Log.d(TAG, "initView: Collapsed")
+            Log.d(TAG, "initView: verticalOffset = $verticalOffset, appBarLayout.totalScrollRange = ${appBarLayout.totalScrollRange}")
 
-                if(binding.ivAvatar.visibility == View.GONE) {
-                    binding.ivAvatar.setImageDrawable(ColorDrawable(Color.parseColor("#051255")))
-                    binding.ivAvatar.visibility = View.VISIBLE
-                    binding.tvExpand.visibility = View.GONE
-                }
+            //透明度渐变来切换折叠展开的效果
+            val toolBarAlpha = abs(verticalOffset).toFloat() / appBarLayout.totalScrollRange.toFloat()
+            val profileAlpha = 1f - toolBarAlpha * 0.5f
+            binding.ivAvatar.alpha = toolBarAlpha
+            binding.ivUsername.alpha = toolBarAlpha
+            binding.ivToolbarBackground.alpha = toolBarAlpha
+            binding.ivProfileCard.alpha = profileAlpha
 
-            } else {
-                Log.d(TAG, "initView: Expanded")
-                binding.ivAvatar.visibility = View.GONE
-                binding.tvExpand.visibility = View.VISIBLE
-            }
         })
     }
 

@@ -12,56 +12,91 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:background="#CCCCCC">
+        >
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:minHeight="100dp"
-            android:background="#648EB3"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <TextView
-                android:id="@+id/tv_expand"
+            <ImageView
+                android:id="@+id/iv_profile_card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Title 展开版本"
-                android:textSize="80sp"
-                android:textColor="#B56161"
-                android:background="#7AA663"
-                android:gravity="center"
-                app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="0.5"
-                />
+                android:src="@drawable/classify_cp"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax"/>
 
             <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 app:layout_collapseMode="pin"
                 android:layout_gravity="top"
-                app:contentInsetStart="0dp">
-                <LinearLayout
+                app:contentInsetStart="0dp"
+                app:titleMargin="0dp">
+
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
                     <ImageView
-                        android:id="@+id/iv_avatar"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="#7A1212"
-                        />
-                    <TextView
+                        android:id="@+id/iv_toolbar_background"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:text="Title 折叠版本"
-                        android:textColor="#6BB888"
-                        android:textSize="20sp"
-                        android:gravity="start"/>
-                </LinearLayout>
+                        android:layout_height="match_parent"
+                        android:src="@drawable/classify_mingpian"
+                        android:scaleType="centerCrop"
+                        />
 
+                    <FrameLayout
+                        android:id="@+id/container_toolbar_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp">
+
+                        <ImageView
+                            android:id="@+id/iv_avatar"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/profile_red_left"
+                            android:layout_gravity="start"/>
+
+                        <TextView
+                            android:id="@+id/iv_username"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="40dp"
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:text="用户昵称"/>
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/cut_diagram_shapw03_nor"
+                            android:layout_gravity="end"
+                            android:tint="@color/white"/>
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/cut_diagram_shapw03_nor"
+                            android:layout_marginEnd="40dp"
+                            android:layout_gravity="end"
+                            android:tint="@color/white"/>
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/cut_diagram_shapw03_nor"
+                            android:layout_marginEnd="80dp"
+                            android:layout_gravity="end"
+                            android:tint="@color/white"/>
+                    </FrameLayout>
+
+                </FrameLayout>
             </androidx.appcompat.widget.Toolbar>
-
-
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         <TextView
@@ -69,7 +104,9 @@
             android:layout_height="50dp"
             android:text="固定不变化区域"
             android:textSize="20sp"
-            android:gravity="start|center_vertical"/>
+            android:gravity="start|center_vertical"
+            android:textColor="@color/black"
+            android:background="@color/white"/>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
