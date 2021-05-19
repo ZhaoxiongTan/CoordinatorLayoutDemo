@@ -1,4 +1,4 @@
-package tech.tanzx.coordinatorlayoutdemo
+package tech.tanzx.coordinatorlayoutdemo.ui.view
 
 import android.content.Context
 import android.util.AttributeSet

@@ -1,13 +1,16 @@
-package tech.tanzx.coordinatorlayoutdemo
+package tech.tanzx.coordinatorlayoutdemo.ui
 
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.BarUtils
 import com.google.android.material.appbar.AppBarLayout
+import tech.tanzx.coordinatorlayoutdemo.adapter.RecyclerAdapter
 import tech.tanzx.coordinatorlayoutdemo.databinding.ActivityMainBinding
+import tech.tanzx.coordinatorlayoutdemo.repo.PersonProvider
 import kotlin.math.abs
 
 class MainActivity : AppCompatActivity() {
@@ -55,6 +58,12 @@ class MainActivity : AppCompatActivity() {
             binding.ivProfileCard.alpha = profileAlpha
 
         })
+
+        val recyclerAdapter = RecyclerAdapter()
+        binding.recyclerPerson.layoutManager = LinearLayoutManager(this)
+        binding.recyclerPerson.adapter = recyclerAdapter
+        recyclerAdapter.setList(PersonProvider.getPerson())
+
     }
 
     companion object {
